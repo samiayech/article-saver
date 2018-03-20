@@ -1,0 +1,47 @@
+@import 'base/reset';
+// @import 'base/fonts';
+@import 'base/mixins';
+@import 'base/variables';
+
+body{
+    background-color: $bodybg;
+    #mycontainer {
+        padding: 20px 0px;
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        #search{
+            background-color: white;
+            width: 50%;
+            height: 600px;
+            h1{
+                text-align: center;
+                font-family: sans-serif;
+                font-size: 25px;
+                font-weight: bold;
+                margin-top: 20px;
+            }
+            form{
+                width: 90%;
+                background-color: red;
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+                margin-left: 35px;
+                height: 40px;
+                #searchField{
+                    width: 80%;
+                }
+                #button{
+                    width: 20%;
+                }
+            }
+        }
+        #saveHolder{
+            background-color: rgb(180, 34, 34);
+            width: 50%;
+            height: 600px;
+        }
+      }
+}
+  
