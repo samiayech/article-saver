@@ -11,7 +11,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
     "babel-preset-env": "^1.6.1",
