@@ -13,18 +13,32 @@
 <body>
     <div id="mycontainer">
       <section id="search">
-        <h1 class="title">Search Articles</h1>
-        <form action="">
-            <input id="searchField" type="text" placeholder="Find an article..">
-            <button id="button"><i class="fa fa-search"></i></button>
-        </form>
-        <div id="resultHolder">
-          <!-- <li><i class="fa fa-search"></i></li> //this from fontello site for the hart -->
-        </div>
+          <h1 class="title">Search Articles</h1>
+          <form action="">
+              <input id="searchField" type="text" placeholder="Find an article..">
+              <button id="button"><i class="fa fa-search"></i></button>
+          </form>
+          <ul id="resultHolder">
+            <!-- <li><i class="fa fa-search"></i></li> //this from fontello site for the hart -->
+          </ul>
       </section>
-      <section id="saveHolder">
+      <section id="save">
       </section>
     </div>    
+
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCBtGD-vPUIySSFYwAdXArk64igNybw0sc",
+        authDomain: "searcharticles-ad72a.firebaseapp.com",
+        databaseURL: "https://searcharticles-ad72a.firebaseio.com",
+        projectId: "searcharticles-ad72a",
+        storageBucket: "searcharticles-ad72a.appspot.com",
+        messagingSenderId: "902251444026"
+      };
+      firebase.initializeApp(config);
+    </script>
   <script src="./js/main.js"></script>
 </body>
 

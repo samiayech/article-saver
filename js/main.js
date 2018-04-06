@@ -1,26 +1,12 @@
-import axios from "axios";
-import ResultListItem from "./components/ResultListItem";
+import SaveComponent from "./components/SaveComponent";
 
+// get holders from DOM
 const searchField = document.getElementById("searchField");
-const resultHolder = document.getElementById("resultHolder");
-let requestURL = "";
-//const savedArticles = [];
-document.querySelector("form").addEventListener("submit", handleFormSubmit);
+const searchSection = document.getElementById("search");
+const saveSection = document.getElementById("save");
 
-function handleFormSubmit(e) {
-  e.preventDefault();
-  requestURL = `https://nieuws.vtm.be/feed/articles/solr?format=json&query=${searchField.value}`;			
-  searchField.value = "";
-  resultHolder.innerHTML = "";
-  resultHolder.style.display = 'block';
-  axios.get(requestURL)
-  .then(function (response) {
- // console.log(response.data.response.items);
-  response.data.response.items.forEach(function(article){
-    let resultArticle = new ResultListItem(article, resultHolder);
-  });
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
+let DBcollection = "articles";
+const firebaseRef = firebase.database().ref(`/${DBcollection}/`); // Make a reference to Firebase
+let savedArticleId = []; // saved selected articles( according their id) to be saved in firebase
+
+const saveComponent = new SaveComponent(saveSection, savedArticleId, firebaseRef);  // create saveComponent object
