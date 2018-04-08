@@ -22,3 +22,4 @@ let sharedArrayIds = []; // shared array, save selected articles( according thei
 //console.log(sharedArrayIds);
 
 const saveComponent = new SaveComponent(saveSection, sharedArrayIds, firebaseRef);  // create saveComponent object
+

@@ -5,11 +5,17 @@
 
 body{
     background-color: $bodybg;
-    h1{
-        font-family: sans-serif;
+    h1, h2{
+        font-family: Lato;
         font-size: 25px;
-        font-weight: bold;
-        margin-top: 20px;
+        font-weight: 900;
+       // margin-top: 20px;
+    }
+    h2{
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 25px;
     }
     #mycontainer {
         padding: 20px 0px;
@@ -127,17 +133,28 @@ body{
                 margin-bottom: 20px;
                 .savedArticle{
                     display: block;
-                    height: 40px;
+                    height: auto;
                     background-color:white;
                     border-radius: 5px;
                     box-shadow: 0 0 10px rgba(0,0,0,.05);
                     display: flex;
-                  //  margin-top: 12px;
+                    flex-wrap: wrap;
+                    margin-top: 12px;
                     border-bottom: 1px solid;
-                    padding-left: 12px; 
-                    padding-right: 12px; 
+                    padding: 12px; 
+                   // padding-right: 12px; 
                    // cursor: pointer;
                     transition: all .4s;
+                    img{
+                        width: 30%;
+                    }
+                    div{
+                        width: 65%;
+                        margin-left: 12px;
+                        a{
+                            margin-left: auto;
+                        }
+                    }
                      &:hover{
                          background-color: rgb(196, 196, 196);
                         // opacity: .5;

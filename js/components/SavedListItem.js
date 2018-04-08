@@ -10,7 +10,7 @@ export default class SavedListItem{
         this.responseSavedArticle = []; //to save the retrieved certain article with its properties       
         this.saveListHolder = "";   // to save the li(listHolder) contains a certain retrieved article from API in it
         this.retrieveAPI();   // get data(articles) from API
-        //console.log(this.responseSavedArticle[0]); //but why the values inside the first element is not accessable
+       // console.log(this.responseSavedArticle); //but why the values inside the first element is not accessable
     }
     //retrieve articles from API according their IDs
     retrieveAPI(){
@@ -25,7 +25,7 @@ export default class SavedListItem{
         axios.get(dataRequest) //get the Api data related to a certain retrieved Id
         .then(function(response) { // you can use here only arrow function(response=>) instead of bind(this)
           this.responseSavedArticle.push(response.data.response.items[0]); //current retrieved saved article from  Api related to a certain Id
-         // console.log(response.data.response.items[0]);     // show the title of the reteieved saved article    
+          console.log(response.data.response.items[0]);     // show the title of the reteieved saved article    
           //let savedArticle = new SavedListItem(saveHolder, collection[prop], response, deleteId);  // saved items
           this.generateHTML();
         }.bind(this))
@@ -39,8 +39,12 @@ export default class SavedListItem{
     generateHTML(){
         const html = `
             <li id='save-${this.retrievedSavedId}' class='savedArticle'>
-                <span>${this.responseSavedArticle[0].title}</span>
+                <img href="#" alt="image" src="${this.responseSavedArticle[0].image.thumb}">
+                <div>
+                <h2>${this.responseSavedArticle[0].title}</h2>
+                <span>${this.responseSavedArticle[0].created.formatted}</span>
                 <a href="#" class="delete"></a>
+                </div>
              </li>
             `;    
         this.saveHolder.insertAdjacentHTML("beforeend", html); // insert the li saved article in ul
