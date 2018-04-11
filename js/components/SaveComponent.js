@@ -5,7 +5,7 @@ export default class SaveComponent{
         this.saveSection = saveSection;
         this.sharedArrayIds = sharedArrayIds;
         this.firebaseRef = firebaseRef;
-        this.saveHolder = ""; //to save ul element in it    
+        this.saveHolder = ""; //ul element to save li(article) element in it    
         this.generateHtml();
         console.log(this.saveHolder);
         this.loadFBdata();
@@ -17,6 +17,8 @@ export default class SaveComponent{
                      `;
         this.saveSection.insertAdjacentHTML('afterbegin', html);
         this.saveHolder = document.getElementById('saveHolder'); 
+       // this.saveHolder = this.saveSection.getElementById('saveHolder'); 
+
     }
 
     // connect with firebase and retrieves IDs of Articles then store IDs in shared array
@@ -28,7 +30,7 @@ export default class SaveComponent{
         for(let prop in collection){ // loop through an object array and get Ids
             //console.log(collection[prop]);
             this.sharedArrayIds.push(collection[prop]); // push all retrieved Ids in the shared array 
-            new SavedListItem(collection[prop], this.saveHolder); //create an object of SavedListItem to get data from API                  
+            new SavedListItem(collection[prop], this.saveHolder, this.sharedArrayIds, this.firebaseRef); //create an object of SavedListItem to get data from API                  
          }
         }.bind(this), function (errorObject) {
                 console.log("The read failed: " + errorObject.code);

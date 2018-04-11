@@ -1,7 +1,7 @@
 import SaveComponent from "./components/SaveComponent";
+import SearchComponent from "./components/SearchComponent";
 
 // get holders from DOM
-const searchField = document.getElementById("searchField");
 const searchSection = document.getElementById("search");
 const saveSection = document.getElementById("save");
 
@@ -19,7 +19,9 @@ firebase.initializeApp(config);
 let DBcollection = "articles";
 const firebaseRef = firebase.database().ref(`/${DBcollection}/`); // Make a reference to Firebase
 let sharedArrayIds = []; // shared array, save selected articles( according their id) to be saved in firebase
-//console.log(sharedArrayIds);
+console.log(sharedArrayIds);
 
 const saveComponent = new SaveComponent(saveSection, sharedArrayIds, firebaseRef);  // create saveComponent object
+const searchComponent = new SearchComponent(searchSection, sharedArrayIds, firebaseRef);  // create searchComponent object
+
 

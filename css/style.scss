@@ -12,7 +12,7 @@ body{
        // margin-top: 20px;
     }
     h2{
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 700;
         text-transform: uppercase;
         line-height: 25px;
@@ -42,7 +42,7 @@ body{
                     width: 20%;
                 }
             }
-            #resultHolder{
+            #searchListHolder{
               display: none;
               //  border: 1px solid;
               width: 90%;
@@ -65,15 +65,15 @@ body{
                         // opacity: .5;
                          color: rgb(124, 24, 24);                      
                       }      
-                    span{
-                        font-size: 15px;
-                        font-family: sans-serif;
-                        line-height: 40px;
-                        width: 91%;
-                        // &:hover{
-                        //     opacity: .7;
-                        // }
-                    }
+                    // h2{
+                    //     font-size: 15px;
+                    //     font-family: sans-serif;
+                    //     line-height: 40px;
+                    //     width: 91%;
+                    //     // &:hover{
+                    //     //     opacity: .7;
+                    //     // }
+                    // }
                     .heart{
                       display: block;
                       height: 40px;
