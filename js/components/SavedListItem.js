@@ -11,22 +11,21 @@ export default class SavedListItem{
         this.retrieveAPI();                     // get data(articles) from API
        // console.log(this.responseSavedArticle);  //but why the values inside the first element is not accessable
        this.setupEvents();
+       
     }
     //retrieve articles from API according their IDs
     retrieveAPI(){
         let dataRequest = "";
         dataRequest = `https://nieuws.vtm.be/feed/articles?format=json&ids=${this.retrievedSavedId}`; // search link from API by id
-        axios.get(dataRequest)        //get the Api data related to a certain retrieved Id
-        .then(function(response) {     // you can use here only arrow function(response=>) instead of bind(this)
-          this.responseSavedArticle.push(response.data.response.items[0]);  //current retrieved saved article from  Api related to a certain Id
+        axios.get(dataRequest)         //get the Api data related to a certain retrieved Id
+        .then(function(response) {      // you can use here  arrow function(response=>) instead of bind(this)
+          this.responseSavedArticle.push(response.data.response.items[0]);   //current retrieved saved article from  Api related to a certain Id
           console.log(response.data.response.items[0]);       // show the title of the reteieved saved article    
-          //let savedArticle = new SavedListItem(saveHolder, collection[prop], response, deleteId);  // saved items
           this.generateHTML();
         }.bind(this))
         .catch(function (error) {
           console.log(error);
         });
-
       }
 
       //write saved items(article) to the Dom inside the savelistHolder
@@ -41,10 +40,10 @@ export default class SavedListItem{
                 </div>
              </li>
             `;    
-        this.saveHolder.insertAdjacentHTML("beforeend", html); // insert the li saved article in ul
-        this.saveListHolder = document.getElementById(`save-${this.retrievedSavedId}`); // refere to a certain(current) saved article
-         // this.saveListHolder = this.saveHolder.getElementById(`save-${this.retrievedSavedId}`); // refere to a certain(current) saved article
-      //console.log(this.saveListHolder);
+        this.saveHolder.insertAdjacentHTML("beforeend", html);          // insert the li saved article in ul
+        this.saveListHolder = this.saveHolder.querySelector(`#save-${this.retrievedSavedId}`); // refere to a certain(current) saved article
+        //this.saveListHolder = document.getElementById(`save-${this.retrievedSavedId}`); // refere to a certain(current) saved article
+        //console.log(this.saveListHolder);
     }
     
     setupEvents(){
@@ -56,17 +55,16 @@ export default class SavedListItem{
     handelDelete(e){
         e.preventDefault();
         if(e.target.nodeName == 'A'){
-            const id = e.target.parentElement.parentElement.dataset.id;
+            const id = e.target.parentElement.parentElement.dataset.id;     // this is obtained easily from <li data-id='${this.retrievedSavedId}' /li>
             //console.log(id);
-            console.log(e.target.parentElement.parentElement);
-            e.target.parentElement.parentElement.remove();   // remove li from ul
-            this.sharedArrayIds = this.sharedArrayIds.filter(function(el){
-                return el != id;  // return all array element that not equal the id
-                
+            e.target.parentElement.parentElement.remove();   // remove li from ul from the DOM
+            //remove a particular id from the shared array
+            this.sharedArrayIds = this.sharedArrayIds.filter(function(element){
+                return element != id;  // return all array element that not equal the id
             })
             //update firebase
-           // this.firebaseRef.set(this.sharedArrayIds);
+            this.firebaseRef.set(this.sharedArrayIds);
         }
-       // console.log(this.sharedArrayIds);
+        //console.log(this.sharedArrayIds);
     }
 }

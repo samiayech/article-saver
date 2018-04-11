@@ -22,6 +22,6 @@ export default class SearchListItem{
         this.searchListHolder.insertAdjacentHTML("beforeend", html);
         this.listResult = this.searchListHolder.querySelector(`#search-${this.id}`); //reference to the article(li)
         //create a heart object to handle save and remove events
-       // let heartElement = new Heart(this.id, this.listResult, this.sharedArrayIds, this.firebaseRef); //new heart object  //may be use saveholder here from the savecomponent
+        let heartElement = new Heart(this.id, this.listResult, this.sharedArrayIds, this.firebaseRef); //new heart object  //may be use saveholder here from the savecomponent
     }
 }

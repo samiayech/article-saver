@@ -24,4 +24,3 @@ console.log(sharedArrayIds);
 const saveComponent = new SaveComponent(saveSection, sharedArrayIds, firebaseRef);  // create saveComponent object
 const searchComponent = new SearchComponent(searchSection, sharedArrayIds, firebaseRef);  // create searchComponent object
 
-
