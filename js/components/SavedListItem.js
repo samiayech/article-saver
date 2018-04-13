@@ -41,7 +41,7 @@ export default class SavedListItem{
                 </div>
              </li>
             `;    
-        this.saveHolder.insertAdjacentHTML("beforeend", html);          // insert the li saved article in ul
+        this.saveHolder.insertAdjacentHTML("afterbegin", html);          // insert the li saved article in ul
         this.saveListHolder = this.saveHolder.querySelector(`#save-${this.retrievedSavedId}`); // refere to a certain(current) saved article(li)
         //this.saveListHolder = this.saveHolder.querySelector('li');
         // this.saveListHolder = document.getElementById(`save-${this.retrievedSavedId}`); // refere to a certain(current) saved article
@@ -64,11 +64,12 @@ export default class SavedListItem{
             this.sharedArrayIds = this.sharedArrayIds.filter(function(element){
                 return element != id;  // return all array element that not equal the id
             })
+            if(searchListHolder.querySelector(`#search-${id}`)){
              //remove the colored heart of an article from the searchHolder related to an clicked(recycle bin) in saved article
             searchListHolder.querySelector(`#search-${id}`).classList.remove('true');
                      //console.log(searchListHolder.querySelector(`#search-${id}`));
+            }
              
-
             //update firebase
             this.firebaseRef.set(this.sharedArrayIds);
         }

@@ -9,7 +9,8 @@ export default class SearchListItem{
         this.firebaseRef = firebaseRef;
         this.listResult = "";  // article (li)
         this.saveHolder = saveHolder;  //save article holder (ul)
-        this.generateHTML();
+        this.savedArticleId = "";    // true/false
+        this.generateHTML();          
     }
     //generate the searched article and insert it in ul
     generateHTML(){ 
@@ -22,7 +23,19 @@ export default class SearchListItem{
         //${this.article.fields.entity_id}
         this.searchListHolder.insertAdjacentHTML("beforeend", html);
         this.listResult = this.searchListHolder.querySelector(`#search-${this.id}`); //reference to the article(li)
+        this.savedArticleId = this.inArray(this.id, this.sharedArrayIds);  // calling method to check if the searched article id inside the shared array
         //create a heart object to handle save and remove events
-        let heartElement = new Heart(this.id, this.listResult, this.sharedArrayIds, this.firebaseRef, this.saveHolder); //new heart object  //may be use saveholder here from the savecomponent
+        let heartElement = new Heart(this.id, this.listResult, this.sharedArrayIds, this.firebaseRef, this.saveHolder, this.savedArticleId); //new heart object  //may be use saveholder here from the savecomponent   
     }
+                // function to check if the searched article is already previously saved in the firebase or shared array
+        inArray(articleId, sharedArray) {
+            let length = sharedArray.length;
+            for (let i = 0; i < length; i++) {
+                if (sharedArray[i] === articleId) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
 }
