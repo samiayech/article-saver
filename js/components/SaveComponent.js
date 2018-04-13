@@ -1,11 +1,12 @@
 import SavedListItem from "./SavedListItem";
 // SaveComponent class to genetate Html elements and get data from firebase
 export default class SaveComponent{
-    constructor(saveSection, sharedArrayIds, firebaseRef){
+    constructor(saveSection, sharedArrayIds, firebaseRef, searchListHolder){
         this.saveSection = saveSection;        // save section holder
         this.sharedArrayIds = sharedArrayIds;  // shared array
         this.firebaseRef = firebaseRef;
         this.saveHolder = ""; //ul element to save li(article) element in it    
+        this.searchListHolder = searchListHolder;   // searched article holder (ul)
         this.generateHtml();
         console.log(this.saveHolder);
         this.loadFBdata();
@@ -29,7 +30,7 @@ export default class SaveComponent{
         let collection = snapshot.val();        //assign the result articles array to a variable
         for(let prop in collection){            // loop through an object array and get Ids
             this.sharedArrayIds.push(collection[prop]);     // push all retrieved Ids in the shared array 
-            new SavedListItem(collection[prop], this.saveHolder, this.sharedArrayIds, this.firebaseRef);     //create an object of SavedListItem to get data from API                  
+            new SavedListItem(collection[prop], this.saveHolder, this.sharedArrayIds, this.firebaseRef, this.searchListHolder);     //create an object of SavedListItem to get data from API                  
          }
         }.bind(this), function (errorObject) {
                 console.log("The read failed: " + errorObject.code);

@@ -1,12 +1,13 @@
 import SearchListItem from "./SearchListItem";
 import axios from "axios";
 export default class SearchComponent{
-    constructor(searchSection, sharedArrayIds, firebaseRef){
+    constructor(searchSection, sharedArrayIds, firebaseRef, saveHolder){
         this.searchSection = searchSection;  //search section at the left side
         this.sharedArrayIds = sharedArrayIds; //shared array to push or remove the chosed article id
         this.firebaseRef = firebaseRef;      //firebase connection reference
-        this.searchListHolder = "";          //ul to insert articles(li) in it
+        this.searchListHolder = "";          //ul to insert searched articles(li) in it
         this.form = "";                      //contains the form of searching field and button
+        this.saveHolder = saveHolder;      // savelistHolder, saved article holder (ul)
         this.generateHTML();          
         this.setupEvents();
     }
@@ -31,7 +32,7 @@ export default class SearchComponent{
     
     handleFormSubmit(e) {
         e.preventDefault();
-        //console.log(e);     
+            //console.log(e);     
         let searchField = this.form.querySelector('#searchField').value; //reference to search field
         let requestURL = `https://nieuws.vtm.be/feed/articles/solr?format=json&query=${searchField}`;			
         searchField = ""; 
@@ -43,7 +44,7 @@ export default class SearchComponent{
             console.log(response.data.response.items);
             response.data.response.items.forEach(function(article){   //loop through the items property
             // let resultArticle = new ResultListItem(article, resultHolder, searchedArticles, saveId, undoSaveId); //result items
-            new SearchListItem(article, this.searchListHolder, this.sharedArrayIds, this.firebaseRef); //result items
+            new SearchListItem(article, this.searchListHolder, this.sharedArrayIds, this.firebaseRef, this.saveHolder); //result items
            }.bind(this));
         }.bind(this))
         .catch(function (error) {

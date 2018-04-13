@@ -21,6 +21,8 @@ const firebaseRef = firebase.database().ref(`/${DBcollection}/`); // Make a refe
 let sharedArrayIds = []; // shared array, save selected articles( according their id) to be saved in firebase
 console.log(sharedArrayIds);
 
-const saveComponent = new SaveComponent(saveSection, sharedArrayIds, firebaseRef);  // create saveComponent object
-const searchComponent = new SearchComponent(searchSection, sharedArrayIds, firebaseRef);  // create searchComponent object
+const saveComponent = new SaveComponent(saveSection, sharedArrayIds, firebaseRef, searchListHolder);  // create saveComponent object
+const saveHolder = saveComponent.saveHolder;      // saved article holder (ul)
+const searchComponent = new SearchComponent(searchSection, sharedArrayIds, firebaseRef, saveHolder);  // create searchComponent object
+const searchListHolder = searchComponent.searchListHolder;  // searched article holder (ul)
 

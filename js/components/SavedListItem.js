@@ -1,15 +1,16 @@
 import axios from "axios";
 // SavedListItem Class to retrieve articles from API and insert it in the savetHolder section(ul)
 export default class SavedListItem{
-    constructor(retrievedSavedId, saveHolder, sharedArrayIds, firebaseRef){
+    constructor(retrievedSavedId, saveHolder, sharedArrayIds, firebaseRef, searchListHolder){
         this.retrievedSavedId = retrievedSavedId;   // retrieved ID from firebase
         this.saveHolder = saveHolder;              // ul
         this.sharedArrayIds = sharedArrayIds;      // shared array with ids
         this.firebaseRef = firebaseRef;
         this.responseSavedArticle = [];           // to save the retrieved certain article with its properties       
         this.saveListHolder = "";                // to save the li(listHolder) contains a certain retrieved article from API in it        
+        this.searchListHolder;                  // searched article holder (ul)
         this.retrieveAPI();                     // get data(articles) from API
-       // console.log(this.responseSavedArticle);  //but why the values inside the first element is not accessable
+            // console.log(this.responseSavedArticle);  //but why the values inside the first element is not accessable
        this.setupEvents();
        
     }
@@ -41,9 +42,10 @@ export default class SavedListItem{
              </li>
             `;    
         this.saveHolder.insertAdjacentHTML("beforeend", html);          // insert the li saved article in ul
-        this.saveListHolder = this.saveHolder.querySelector(`#save-${this.retrievedSavedId}`); // refere to a certain(current) saved article
-        //this.saveListHolder = document.getElementById(`save-${this.retrievedSavedId}`); // refere to a certain(current) saved article
-        //console.log(this.saveListHolder);
+        this.saveListHolder = this.saveHolder.querySelector(`#save-${this.retrievedSavedId}`); // refere to a certain(current) saved article(li)
+        //this.saveListHolder = this.saveHolder.querySelector('li');
+        // this.saveListHolder = document.getElementById(`save-${this.retrievedSavedId}`); // refere to a certain(current) saved article
+              //console.log(this.saveListHolder);
     }
     
     setupEvents(){
@@ -62,9 +64,14 @@ export default class SavedListItem{
             this.sharedArrayIds = this.sharedArrayIds.filter(function(element){
                 return element != id;  // return all array element that not equal the id
             })
+             //remove the colored heart of an article from the searchHolder related to an clicked(recycle bin) in saved article
+            searchListHolder.querySelector(`#search-${id}`).classList.remove('true');
+                     //console.log(searchListHolder.querySelector(`#search-${id}`));
+             
+
             //update firebase
             this.firebaseRef.set(this.sharedArrayIds);
         }
-        //console.log(this.sharedArrayIds);
+               //console.log(this.sharedArrayIds);
     }
 }
