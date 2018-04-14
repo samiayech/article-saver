@@ -20,6 +20,8 @@ export default class Heart{
             this.listResult.classList.remove('true');   // remain a heart without color 
         }
     }
+    //important Note: here the event is done on li(listResult) because it is recieved from an object,
+    // but if it i generated here in this class so can not make an event on it !!!!!!
     setupEvent(){
         this.listResult.querySelector('.heart').addEventListener('click', this.handleHeart.bind(this));
     }
