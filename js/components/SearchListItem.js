@@ -16,7 +16,13 @@ export default class SearchListItem{
     generateHTML(){ 
         const html = `
         <li data-id='${this.id}' id='search-${this.id}' class='article'>
-            <h2>${this.article.title}</h2>
+            <figure>
+                <img href="#" alt="image" src="${this.article.fields.image_path}">
+                <time>${this.article.fields.ds_created}</time>
+                <h2>${this.article.title}</h2>
+            </figure>
+            <p>${this.article.fields.content}</p>
+            <a href="${this.article.fields.url}">Show original..</a>
             <a href="#" class="heart"></a>
        </li>
     `;    
