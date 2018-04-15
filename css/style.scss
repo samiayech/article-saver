@@ -33,6 +33,9 @@ body{
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
+        .copy{
+            display: "none";
+        }
         #search{
             background-color:#eef3f6;
             width: 55%;  //750px
@@ -109,7 +112,8 @@ body{
                         }
                         time{
                             left: 10px;
-                            bottom: 10px;   
+                            bottom: 10px; 
+                            margin-left: 3px;  
                         }
                         img{
                             position: absolute;
@@ -122,6 +126,8 @@ body{
                       p{
                           font-size: 18px;
                           line-height: 22px;
+                          margin-left: 3px;
+                          margin-right: 3px;
                       }     
                     .heart{
                       display: block;

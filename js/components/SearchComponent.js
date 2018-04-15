@@ -38,7 +38,8 @@ export default class SearchComponent{
         setTimeout(function(showResult){
             document.querySelector('#loader').style.display = "none";
             this.searchListHolder.style.display = 'block'; 
-        }.bind(this), 2000);        
+            document.querySelector('.copy').style.display = "block";
+        }.bind(this), 2000);      
         let searchField = this.form.querySelector('#searchField').value; //reference to search field
         let requestURL = `https://nieuws.vtm.be/feed/articles/solr?format=json&query=${searchField}`;			
         searchField = ""; 
