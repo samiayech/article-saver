@@ -18,7 +18,7 @@ export default class SearchComponent{
                         <input id="searchField" type="text" placeholder="Find an article..">
                         <button id="button"><i class="fa fa-search"></i></button>
                     </form>
-                     <ul id="searchListHolder"></ul>
+                     <ul id="searchListHolder" class="animate-bottom"></ul>
                 `;
         this.searchSection.insertAdjacentHTML('beforeend', html); //insert html elements in search section
         this.searchListHolder = this.searchSection.querySelector('#searchListHolder'); // reference to ul      // why querySelector works and use this.searchSection doesnot work
@@ -32,13 +32,18 @@ export default class SearchComponent{
     
     handleFormSubmit(e) {
         e.preventDefault();
-            //console.log(e);     
+        //console.log(e); 
+        document.querySelector('#loader').style.display = "block";   //show the loader
+        //show results after 2000ms
+        setTimeout(function(showResult){
+            document.querySelector('#loader').style.display = "none";
+            this.searchListHolder.style.display = 'block'; 
+        }.bind(this), 2000);        
         let searchField = this.form.querySelector('#searchField').value; //reference to search field
         let requestURL = `https://nieuws.vtm.be/feed/articles/solr?format=json&query=${searchField}`;			
         searchField = ""; 
         console.log( this.searchListHolder); 
         this.searchListHolder.innerHTML = ""; 
-        this.searchListHolder.style.display = 'block'; 
         axios.get(requestURL)
         .then(function (response) {
             console.log(response.data.response.items);

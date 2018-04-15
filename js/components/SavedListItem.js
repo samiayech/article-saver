@@ -1,8 +1,12 @@
 import axios from "axios";
 var popupS = require('popups');  //import popup from Node Module
+import $ from "jquery";         // import jQuery
+require("jquery-mousewheel")($);
+require("malihu-custom-scrollbar-plugin")($);  //require custom scroll bar from module
+
 // SavedListItem Class to retrieve articles from API and insert it in the savetHolder section(ul)
 export default class SavedListItem{
-    constructor(retrievedSavedId, saveHolder, sharedArrayIds, firebaseRef, searchListHolder){
+    constructor(retrievedSavedId, saveHolder, sharedArrayIds, firebaseRef, searchListHolder, noPages){
         this.retrievedSavedId = retrievedSavedId;   // retrieved ID from firebase
         this.saveHolder = saveHolder;              // ul
         this.sharedArrayIds = sharedArrayIds;      // shared array with ids
@@ -10,9 +14,11 @@ export default class SavedListItem{
         this.responseSavedArticle = [];           // to save the retrieved certain article with its properties       
         this.saveListHolder = "";                // to save the li(listHolder) contains a certain retrieved article from API in it        
         this.searchListHolder;                  // searched article holder (ul)
+        this.noPages = noPages;                 // no of pages
+        this.noOfArticles = this.sharedArrayIds.length;   
         this.retrieveAPI();                     // get data(articles) from API
          //console.log(this.responseSavedArticle);  //but why the values inside the first element is not accessable
-        this.setupEvents();       
+        this.setupEvents();  
     }
     //retrieve articles from API according their IDs
     retrieveAPI(){
@@ -41,12 +47,16 @@ export default class SavedListItem{
                     <a href="#" class="delete"></a>
                 </div>
              </li>
-            `;    
+            `; 
+            //view 1articles in one page   
+            if (this.noOfArticles > 10 && this.noPages == 1) {
+                this.saveHolder.querySelector("#loadMore").style.display = "block";
+              }
         this.saveHolder.insertAdjacentHTML("afterbegin", html);          // insert the li saved article in ul
         this.saveListHolder = this.saveHolder.querySelector(`#save-${this.retrievedSavedId}`); // refere to a certain(current) saved article(li)
         //this.saveListHolder = this.saveHolder.querySelector('li');
         // this.saveListHolder = document.getElementById(`save-${this.retrievedSavedId}`); // refere to a certain(current) saved article
-              //console.log(this.saveListHolder);
+              //console.log(this.saveListHolder);        
     }
     // important note: the event must be on ul and can not be on li directly because li is not recieved directly from instance object but it is generated here in this class
     setupEvents(){
@@ -82,14 +92,20 @@ export default class SavedListItem{
                 popupS.modal({
                     title:   `${this.responseSavedArticle[0].title}`,
                     content: `
+                        <div class="popup">
                             <img href="#" alt="image" src="${this.responseSavedArticle[0].image.medium}">
                             <time class="time">${this.responseSavedArticle[0].created.formatted}</time>
                             <p>${this.responseSavedArticle[0].text_html}</p>
                             <a href="${this.responseSavedArticle[0].url
                             }">Show original..</a>
-                         `
+                        </div>`
                 }); 
-            }            
+            }
+             //add scrollbar to popup window
+            $(".popup").mCustomScrollbar({
+                theme: "dark",
+                advanced: { updateOnContentResize: true }
+              });            
         }
     }
 }

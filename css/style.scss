@@ -3,6 +3,9 @@
 @import 'base/mixins';
 @import 'base/variables';
 
+@import '../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css';
+//@import '../node_modules/popups/css/popupS.css';
+
 * {
     box-sizing: border-box;
 }
@@ -44,7 +47,7 @@ body{
                 }
                 #button{
                     width: 20%;
-                    background-color: rgb(124, 24, 24);
+                    background-color: rgb(226, 37, 37);
                     cursor:pointer;
                     .fa{
                         font-size: 18px;
@@ -167,7 +170,7 @@ body{
             justify-content: center;
             flex-wrap: wrap;
             #saveHolder{
-               // display: none;
+                display: none;
                 //  border: 1px solid;
                 width: 90%;
                 margin-bottom: 20px;
@@ -236,8 +239,57 @@ body{
                         content: '\e802';
                       }
                 }
+                #loadMore{
+                    background-color: rgb(226, 37, 37);
+                    color: white;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0,0,0,.05);
+                    width: 100%;
+                    height: 40px;
+                    text-transform: uppercase;
+                    font-size: 18px;
+                    line-height: 40px;
+                    text-align: center;
+                    display: none;  
+                }
             }
         }
+    }
+
+    /* Center the loader */
+    #loader {
+        position: absolute;
+        display: none;
+        left: 50%;
+        top: 50%;
+        z-index: 4;
+        width: 150px;
+        height: 150px;
+        margin: -75px 0 0 -75px;
+        border: 16px solid #5aa6d8;;
+        border-radius: 50%;
+        border-top: 16px solid #f54646;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    /* Add animation to "page content" */
+    .animate-bottom {
+        position: relative;
+        animation-name: animatebottom;
+        animation-duration: 1s
+    }
+    
+    @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
     }
 
     //popups module CSS
@@ -428,6 +480,7 @@ body{
             -webkit-animation: spinner .6s linear infinite;
         animation: spinner .6s linear infinite;
     }
-
 }
+//responsive
+
   
