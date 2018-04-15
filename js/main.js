@@ -29,11 +29,14 @@ console.log(sharedArrayIds);
 document.addEventListener('DOMContentLoaded', handlePageload);
 //show loader while loading data
 function handlePageload(){
+      searchSection.style.display = "none";
+      saveSection.style.display = "none";
       document.querySelector('#loader').style.display = "block";   //show the loader
       //show results after 2000ms
       setTimeout(function(showResult){
+        searchSection.style.display = "block";
+        saveSection.style.display = "block";  
         document.getElementById('loader').style.display = "none";
-        document.getElementById('saveHolder').style.display = 'block'; 
     }, 2000);        
 }
 

@@ -15,6 +15,7 @@ body{
     h1, h2{
         font-size: 25px;
         font-weight: 900;
+        text-align: center;
        // margin-top: 20px;
     }
     h2{
@@ -34,8 +35,8 @@ body{
             width: 55%;
            //height: 700px;
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
+            justify-content: center;
             form{
                 width: 90%;
                 display: flex;
@@ -60,6 +61,7 @@ body{
               //  border: 1px solid;
               width: 90%;
               margin-bottom: 20px;
+              margin: 0 auto;
                 .article{
                     display: block;
                     height: 450px;
@@ -167,13 +169,14 @@ body{
             width: 45%;
         // height: 700px;
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
+            justify-content: center;
             #saveHolder{
-                display: none;
+                //display: none;
                 //  border: 1px solid;
                 width: 90%;
                 margin-bottom: 20px;
+                margin: 0 auto;
                 .savedArticle{
                    // display: block;
                     height: auto;
