@@ -39,8 +39,10 @@ export default class SavedListItem{
     generateHTML(){
         const html = `
             <li data-id='${this.retrievedSavedId}' id='save-${this.retrievedSavedId}' class='savedArticle'>
-                <img href="#" alt="image" src="${this.responseSavedArticle[0].image.thumb}">
-                <div>
+                <div class="imgHolder">
+                    <img href="#" alt="image" src="${this.responseSavedArticle[0].image.thumb}">
+                </div>
+                <div class="text">
                     <h2>${this.responseSavedArticle[0].title}</h2>
                     <time class="time">${this.responseSavedArticle[0].created.formatted}</time>
                     <span class="showMore">Show more..</span>
